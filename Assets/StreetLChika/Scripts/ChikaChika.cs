@@ -10,6 +10,10 @@ namespace Chibi929
     [SerializeField] private float _waitTime = 3;
     [SerializeField] private float _delayTime = 0;
 
+    [Header("Object Settings")]
+    [Tooltip("設定されていると優先的に使用する。設定されていない場合は Children から Light を探します。")]
+    [SerializeField] private Light _light;
+
     [Header("Other Settings")]
     [SerializeField] private bool _isRepeating = false;
 
@@ -18,6 +22,10 @@ namespace Chibi929
     void Awake()
     {
       _mat = GetComponent<MeshRenderer>().material;
+      if (!_light)
+      {
+        _light = GetComponentInChildren<Light>();
+      }
       TurnOff();
     }
 
@@ -57,11 +65,19 @@ namespace Chibi929
     private void TurnOn()
     {
       _mat.EnableKeyword("_EMISSION");
+      if (_light)
+      {
+        _light.enabled = true;
+      }
     }
 
     private void TurnOff()
     {
       _mat.DisableKeyword("_EMISSION");
+      if (_light)
+      {
+        _light.enabled = false;
+      }
     }
   }
 }
