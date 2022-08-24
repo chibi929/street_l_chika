@@ -11,7 +11,7 @@ namespace Chibi929
     [SerializeField] private float _delayTime = 0;
 
     [Header("Object Settings")]
-    [Tooltip("設定されていると優先的に使用する。設定されていない場合は Children から Light を探します。")]
+    [Tooltip("設定されると優先的に使用します。未設定の場合は Children から Light を探します。")]
     [SerializeField] private Light _light;
 
     [Header("Other Settings")]
